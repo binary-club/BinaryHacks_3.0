@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BinaryHacks 3.0 - Official Rule Book</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+    <style>
+        :root {
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --accent: #7367f0;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark), #16213e);
+            color: var(--light);
+            line-height: 1.6;
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 0;
+            background: linear-gradient(45deg, rgba(0,242,254,0.1), rgba(79,172,254,0.1));
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            animation: headerFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes headerFloat {
+            0%, 100% { transform: translateZ(0) rotateX(0); }
+            50% { transform: translateZ(20px) rotateX(2deg); }
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0.1;
+            z-index: -1;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .logo {
+            max-width: 200px;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px var(--primary));
+            animation: float 3s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0,242,254,0.5);
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            animation: lineGrow 2s ease forwards;
+        }
+
+        @keyframes lineGrow {
+            to { width: 80%; }
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 0.5s;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.03),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        section:hover {
+            transform: translateY(-5px) rotateX(2deg);
+            box-shadow: 0 10px 20px rgba(0,242,254,0.1);
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        h2::before {
+            content: '▹';
+            position: absolute;
+            left: -20px;
+            color: var(--primary);
+            opacity: 0;
+            animation: slideIn 0.5s ease forwards;
+        }
+
+        @keyframes slideIn {
+            to { 
+                opacity: 1;
+                left: -30px;
+            }
+        }
+
+        h3 {
+            color: var(--secondary);
+            font-family: 'Orbitron', sans-serif;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.4rem;
+        }
+
+        ul {
+            list-style: none;
+            margin-left: 1rem;
+        }
+
+        li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        li:hover {
+            transform: translateX(10px);
+        }
+
+        li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        li:hover::before {
+            transform: scale(1.5);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .contact-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0,242,254,0.2);
+        }
+
+        .contact-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            color: var(--light);
+            margin: 0.3rem 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(45deg, rgba(0,242,254,0.1), rgba(79,172,254,0.1));
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        footer p {
+            color: var(--light);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px var(--primary),
+                           0 0 10px var(--primary),
+                           0 0 15px var(--primary);
+            }
+            to {
+                text-shadow: 0 0 10px var(--primary),
+                           0 0 20px var(--primary),
+                           0 0 30px var(--primary);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <header>
+        <img src="logo.png" alt="BinaryHacks Logo" class="logo">
+        <h1 class="glow">BinaryHacks 3.0</h1>
+        <p class="subtitle">Official Rule Book</p>
+    </header>
+
+    <div class="container">
+        <section>
+            <h2>Team Formation</h2>
+            <ul>
+                <li>Minimum 3 and maximum 5 participants per team, including the team leader.</li>
+                <li>Teams can include members from any year or department.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Domains & Themes</h2>
+            <h3>Domains:</h3>
+            <ul>
+                <li>WEB</li>
+                <li>APP</li>
+                <li>IOT</li>
+                <li>ML-AI</li>
+                <li>ROBOTICS</li>
+            </ul>
+            <h3>Themes:</h3>
+            <ul>
+                <li>SOCIAL</li>
+                <li>HEALTHCARE</li>
+                <li>EDUCATION</li>
+                <li>ENVIRONMENT</li>
+                <li>OPEN-INNOVATION</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Event Plan</h2>
+            <h3>Day 1 (21 May):</h3>
+            <ul>
+                <li>All team members must be present at the club desk at 1:30 A.M. at Atal Sabha Ghar.</li>
+                <li>Teams will develop their projects during the event day.</li>
+                <li>Club coordinators will be available for assistance.</li>
+            </ul>
+            <h3>Day 2:</h3>
+            <ul>
+                <li>Teams will prepare a PPT of their project.</li>
+                <li>All team members must be available for project presentations.</li>
+                <li>Each team will present their PPTs, and points will be given based on domain, tech-stack, PPT, teamwork, and involvement.</li>
+                <li>Winner announcement and prizes for the top 3 teams will be distributed on the same day.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Security & Conduct</h2>
+            <ul>
+                <li>All participants will be issued an event-specific ID card and a band by the organizing team. These must be worn and visible at all times during the event.</li>
+                <li>Only participants wearing the official event ID card and band, and authorized personnel, are allowed in the event area.</li>
+                <li>Use of unauthorized electronic devices (e.g., hacking tools, external storage) is strictly prohibited.</li>
+                <li>Teams are responsible for backing up their work. The organizers are not liable for data loss.</li>
+                <li>Any form of misconduct, cheating, or disruptive behavior will result in immediate disqualification.</li>
+                <li>In case of emergency, follow the instructions of the event coordinators and security staff.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Event Logistics</h2>
+            <ul>
+                <li>All participants are free to leave at 5:00 PM on Day 1. Teams can return the next day to continue and complete their work.</li>
+                <li>Keep your belongings safe. The organizers are not responsible for any loss or theft.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Contact for Queries</h2>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <h3>Kartik Kumar</h3>
+                    <p>President</p>
+                    <p>23456776</p>
+                </div>
+                <div class="contact-card">
+                    <h3>Amber Mittal</h3>
+                    <p>Vice President</p>
+                    <p>12345654</p>
+                </div>
+                <div class="contact-card">
+                    <h3>Kaif</h3>
+                    <p>Coordinator</p>
+                    <p>345654</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 BinaryHacks. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Initialize particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#00f2fe'
+                },
+                shape: {
+                    type: 'circle'
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#00f2fe',
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 0.5
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Add scroll reveal animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'all 0.5s ease';
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html> 
